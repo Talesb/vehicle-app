@@ -11,7 +11,7 @@ on:
 env:
   IMAGE_NAME: ${{ vars.DOCKERHUB_USERNAME }}/vehicle-app
   TAG_NAME: latest
-  DOCKER_IMAGE_NAME: ${{ IMAGE_NAME }}:${{ TAG_NAME }}
+  DOCKER_IMAGE_NAME: test
 
 jobs:
   build:
