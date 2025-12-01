@@ -8,12 +8,14 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+env:
+  IMAGE_NAME: ${{ vars.DOCKERHUB_USERNAME }}/vehicle-app
+  TAG_NAME: latest
+  DOCKER_IMAGE_NAME: ${{ env.IMAGE_NAME }}:${{ env.TAG_NAME }}
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/maven_build
@@ -21,4 +23,10 @@ jobs:
       - uses: ./.github/actions/docker_build
         with:
           path_dockerfile: src/main/docker/Dockerfile.jvm
-          image_name: ${{ vars.DOCKERHUB_USERNAME }}/academy
+          image_name: ${{ env.IMAGE_NAME }}
+          tag_name: ${{ env.TAG_NAME }}
+
+      - uses: ./.github/actions/docker_push
+        with:
+          DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

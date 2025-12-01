@@ -22,13 +22,9 @@ runs:
       shell: bash
 
     - name: Define Image tag
-      run: echo "DOCKER_COMPLETE_TAG=${{inputs.image_name}}:${{ env.TAG }}" >> $GITHUB_ENV
+      run: echo "DOCKER_IMAGE_NAME=${{inputs.image_name}}:${{ env.TAG }}" >> $GITHUB_ENV
       shell: bash
 
     - name: Build Docker Image
-      run: docker build . --file ${{ inputs.path_dockerfile }} --tag ${{ env.DOCKER_COMPLETE_TAG }}
-      shell: bash
-
-    - name: Verify Docker Images
-      run: docker images
+      run: docker build . --file ${{ inputs.path_dockerfile }} --tag ${{ env.DOCKER_IMAGE_NAME }}
       shell: bash
