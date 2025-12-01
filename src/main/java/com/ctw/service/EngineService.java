@@ -5,6 +5,7 @@ import com.ctw.dto.EngineDTO;
 import com.ctw.repository.EngineRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,15 +15,18 @@ public class EngineService {
     @Inject
     EngineRepository engineRepository;
 
+    @Transactional
     public List<EngineDTO> getAll() {
         return engineRepository.listAll().stream().map(this::toDTO).collect(Collectors.toList());
     }
 
+    @Transactional
     public EngineDTO getById(String id) {
         Engine engine = engineRepository.findById(id);
         return engine != null ? toDTO(engine) : null;
     }
 
+    @Transactional
     public EngineDTO create(EngineDTO dto) {
         Engine engine = new Engine();
         engine.setType(Enum.valueOf(com.ctw.entity.EngineType.class, dto.getType()));
@@ -32,6 +36,7 @@ public class EngineService {
         return toDTO(engine);
     }
 
+    @Transactional
     public EngineDTO update(String id, EngineDTO dto) {
         Engine engine = engineRepository.findById(id);
         if (engine == null) return null;
@@ -41,6 +46,7 @@ public class EngineService {
         return toDTO(engine);
     }
 
+    @Transactional
     public boolean delete(String id) {
         return engineRepository.deleteById(id);
     }

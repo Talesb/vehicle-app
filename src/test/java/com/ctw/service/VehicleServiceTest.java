@@ -1,4 +1,4 @@
-package com.ctw;
+package com.ctw.service;
 
 import com.ctw.dto.VehicleDTO;
 import com.ctw.entity.Engine;
@@ -6,10 +6,8 @@ import com.ctw.entity.EngineType;
 import com.ctw.entity.Vehicle;
 import com.ctw.repository.EngineRepository;
 import com.ctw.repository.VehicleRepository;
-import com.ctw.service.VehicleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
