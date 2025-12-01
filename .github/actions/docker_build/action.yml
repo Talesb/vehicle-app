@@ -1,0 +1,34 @@
+name: Docker Build Image
+description: "Action to Build the Project Docker Image"
+
+inputs:
+  path_dockerfile:
+    description: "Path to Dockerfile"
+  image_name:
+    description: "Image name"
+  tag_name:
+    description: "Docker Image Tag name"
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Define Tag name
+      run: |
+        if [ -z "${{ inputs.tag_name}}" ]; then
+          echo "TAG=$(date +%s)" >> $GITHUB_ENV
+        else
+          echo "TAG=${{ inputs.tag_name}}" >> $GITHUB_ENV
+        fi
+      shell: bash
+
+    - name: Define Image tag
+      run: echo "DOCKER_COMPLETE_TAG=${{inputs.image_name}}:${{ env.TAG }}" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Build Docker Image
+      run: docker build . --file ${{ inputs.path_dockerfile }} --tag ${{ env.DOCKER_COMPLETE_TAG }}
+      shell: bash
+
+    - name: Verify Docker Images
+      run: docker images
+      shell: bash
