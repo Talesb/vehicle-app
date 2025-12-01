@@ -27,6 +27,7 @@ public class EngineService {
         Engine engine = new Engine();
         engine.setType(Enum.valueOf(com.ctw.entity.EngineType.class, dto.getType()));
         engine.setHorsepower(dto.getHorsepower());
+        engine.setName(dto.getName());
         engineRepository.persist(engine);
         return toDTO(engine);
     }
@@ -36,6 +37,7 @@ public class EngineService {
         if (engine == null) return null;
         engine.setType(Enum.valueOf(com.ctw.entity.EngineType.class, dto.getType()));
         engine.setHorsepower(dto.getHorsepower());
+        engine.setName(dto.getName());
         return toDTO(engine);
     }
 
@@ -48,7 +50,7 @@ public class EngineService {
         dto.setId(engine.getId());
         dto.setType(engine.getType().name());
         dto.setHorsepower(engine.getHorsepower());
+        dto.setName(engine.getName());
         return dto;
     }
 }
-
