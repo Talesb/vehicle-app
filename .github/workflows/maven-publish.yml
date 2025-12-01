@@ -23,5 +23,5 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Create Docker Image
       run: |
-        docker build --file src/main/docker/Dockerfile.jvm --tag vehicle-app:$(date +%s)
+        docker build . --file src/main/docker/Dockerfile.jvm --tag vehicle-app:$(date +%s)
         docker image ls
