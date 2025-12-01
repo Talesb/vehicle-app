@@ -7,6 +7,8 @@ import com.ctw.repository.VehicleRepository;
 import com.ctw.repository.EngineRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,15 +19,18 @@ public class VehicleService {
     @Inject
     EngineRepository engineRepository;
 
+    @Transactional
     public List<VehicleDTO> getAll() {
         return vehicleRepository.listAll().stream().map(this::toDTO).collect(Collectors.toList());
     }
 
+    @Transactional
     public VehicleDTO getById(String id) {
         Vehicle vehicle = vehicleRepository.findById(id);
         return vehicle != null ? toDTO(vehicle) : null;
     }
 
+    @Transactional
     public VehicleDTO create(VehicleDTO dto) {
         Vehicle vehicle = new Vehicle();
         vehicle.setName(dto.getName());
@@ -37,6 +42,7 @@ public class VehicleService {
         return toDTO(vehicle);
     }
 
+    @Transactional
     public VehicleDTO update(String id, VehicleDTO dto) {
         Vehicle vehicle = vehicleRepository.findById(id);
         if (vehicle == null) return null;
@@ -48,6 +54,7 @@ public class VehicleService {
         return toDTO(vehicle);
     }
 
+    @Transactional
     public boolean delete(String id) {
         return vehicleRepository.deleteById(id);
     }

@@ -6,6 +6,8 @@ public class EngineDTO {
     private String type;
     private int horsepower;
 
+    public EngineDTO() {}
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
     public String getName() { return name; }
