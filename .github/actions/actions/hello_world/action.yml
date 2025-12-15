@@ -1,6 +1,6 @@
-name: maven_build
+name: hello_world
 author: Tales Figueiredo
-description: maven_build
+description: hello_world
 inputs:
   hello_to:
     description: "Name to say hello."
