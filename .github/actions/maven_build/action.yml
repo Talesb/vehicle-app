@@ -1,6 +1,6 @@
-name: docker_build
+name: maven_build
 author: Tales Figueiredo
-description: docker_build
+description: maven_build
 runs:
   using: 'composite'
   steps:
@@ -12,12 +12,4 @@ runs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install
-      shell: bash
-
-    - name: Docker Build
-      run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
-      shell: bash
-
-    - name: Docker ls
-      run: docker images
       shell: bash
