@@ -1,0 +1,17 @@
+name: maven_build
+author: Tales Figueiredo
+description: maven_build
+inputs:
+  hello_to:
+    description: "Name to say hello."
+    required: false
+    default: "World"
+
+runs:
+  using:
+    composite
+  steps:
+    - name: Hello World Custom Action
+      id: hello_world_step
+      run: echo "Hello, ${{ inputs.hello_to }}! This is a custom action."
+      shell: bash
