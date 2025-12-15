@@ -75,7 +75,7 @@ class VehicleServiceTest {
     @Test
     void testGetById() {
         Engine engine = new Engine();
-        engine.setId("engine-2");
+        engine.setId("engine-1");
         Vehicle vehicle = new Vehicle();
         vehicle.setId("v1");
         vehicle.setName("Car");
