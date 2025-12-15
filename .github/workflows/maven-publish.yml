@@ -16,6 +16,12 @@ jobs:
 
       - uses: ./.github/actions/maven_build
       - uses: ./.github/actions/docker_build
+        with:
+          path_dockerfile: src/main/docker/Dockerfile.jvm
+          image_name: vehicle-app
+
+      - name: Docker list
+        run: docker images
 
 
 

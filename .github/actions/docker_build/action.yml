@@ -1,13 +1,28 @@
 name: docker_build
 author: ctw03141
 description: docker_build
+inputs:
+  path_dockerfile:
+    description: "Path to Dockerfile"
+    required: true
+  image_name:
+    description: "Image name"
+    required: true
+  tag_name:
+    description: "Docker Image Tag name"
+
 runs:
-  using: composite
+  using: 'composite'
   steps:
-    - name: Docker Build
-      run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
+    - name: Define Tag name
+      run: |
+        if [ -z "${{ inputs.tag_name}}" ]; then
+          echo "TAG=$(date +%s)" >> $GITHUB_ENV
+        else
+          echo "TAG=${{ inputs.tag_name}}" >> $GITHUB_ENV
+        fi
       shell: bash
 
-    - name: List docker image
-      run: docker images
+    - name: Build Docker Image
+      run: docker build . --file ${{ inputs.path_dockerfile }} --tag ${{ inputs.image_name }}:${{ env.TAG }}
       shell: bash
