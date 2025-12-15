@@ -1,0 +1,13 @@
+name: docker_build
+author: ctw03141
+description: docker_build
+runs:
+  using: composite
+  steps:
+    - name: Docker Build
+      run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
+      shell: bash
+
+    - name: List docker image
+      run: docker images
+      shell: bash
