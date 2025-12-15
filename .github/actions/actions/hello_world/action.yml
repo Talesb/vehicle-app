@@ -8,8 +8,7 @@ inputs:
     default: "World"
 
 runs:
-  using:
-    composite
+  using: 'composite'
   steps:
     - name: Hello World Custom Action
       id: hello_world_step
