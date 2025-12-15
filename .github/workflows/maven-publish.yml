@@ -16,16 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/maven_build
 
-      - uses: ./.github/actions/docker_build
-        id: docker_build
-        with:
-          path_dockerfile: src/main/docker/Dockerfile.jvm
-          image_name: ${{ vars.DOCKERHUB_USERNAME }}/vehicle-app
-
-      - uses: ./.github/actions/docker_push
-        with:
-          DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          DOCKER_IMAGE_NAME: ${{ steps.docker_build.outputs.docker_image_name }}
+      - name: Hello World Action
+        run: echo "Hello, world!"
 
 
