@@ -24,6 +24,8 @@ jobs:
         run: mvn clean install
       - name: Docker Build
         run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
+      - name: Docker ls
+        run: docker images
 
 
 
