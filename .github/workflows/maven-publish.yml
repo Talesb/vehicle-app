@@ -21,7 +21,6 @@ jobs:
         with:
           path_dockerfile: src/main/docker/Dockerfile.jvm
           image_name: ${{ vars.DOCKERHUB_USERNAME }}/vehicle-app
-          tag_name: latest
 
       - uses: ./.github/actions/docker_push
         with:
