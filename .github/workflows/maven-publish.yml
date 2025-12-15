@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/maven_build
-
       - name: Hello World Action
         run: echo "Hello, world!"
 
