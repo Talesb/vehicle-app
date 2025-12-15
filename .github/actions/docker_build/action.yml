@@ -11,6 +11,11 @@ inputs:
   tag_name:
     description: "Docker Image Tag name"
 
+outputs:
+  docker_image_name:
+    description: "Built Docker Image Name"
+    value: ${{ steps.set_docker_image_name.outputs.docker_image_name }}
+
 runs:
   using: 'composite'
   steps:
@@ -25,4 +30,9 @@ runs:
 
     - name: Build Docker Image
       run: docker build . --file ${{ inputs.path_dockerfile }} --tag ${{ inputs.image_name }}:${{ env.TAG }}
+      shell: bash
+
+    - name: Set output docker_image_name
+      id: set_docker_image_name
+      run: echo "docker_image_name=${{ inputs.image_name  }}:${{ env.TAG }}" >> $GITHUB_OUTPUT
       shell: bash
